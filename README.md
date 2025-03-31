@@ -11,4 +11,4 @@ This public repo provides a safe and simple way to bootstrap a developer's works
 2. **Run this command:**
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/myosh/aws-workspace-bootstrap/main/bootstrap.sh)
+bash <(curl -s https://raw.githubusercontent.com/myosh/aws-workspace-bootstrap/develop/bootstrap.sh)
