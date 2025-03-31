@@ -60,6 +60,9 @@ if [ ! -d "$SETUP_DIR" ]; then
     git clone git@github.com:myosh/aws-workspace-setup.git "$SETUP_DIR"
 else
     echo "📁 Repo already exists at $SETUP_DIR"
+    echo "🔄 Pulling the latest changes..."
+    cd "$SETUP_DIR"
+    git pull
 fi
 
 # --- 7. Run the Ansible Playbook ---
