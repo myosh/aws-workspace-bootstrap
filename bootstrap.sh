@@ -9,11 +9,21 @@ sudo apt update
 sudo apt install -y git ansible openssh-client
 
 # --- 2. Configure Git ---
-read -p "Enter your Git name: " git_name
-read -p "Enter your Git email: " git_email
+git_name=$(git config --global user.name)
+git_email=$(git config --global user.email)
 
-git config --global user.name "$git_name"
-git config --global user.email "$git_email"
+if [ -z "$git_name" ] || [ -z "$git_email" ]; then
+    echo "🔧 Configuring Git..."
+    read -p "Enter your Git name: " git_name
+    read -p "Enter your Git email: " git_email
+
+    git config --global user.name "$git_name"
+    git config --global user.email "$git_email"
+else
+    echo "✅ Git is already configured with:"
+    echo "   Name: $git_name"
+    echo "   Email: $git_email"
+fi
 
 # --- 3. Generate SSH Key (if needed) ---
 SSH_KEY="$HOME/.ssh/id_ed25519"
@@ -55,7 +65,7 @@ fi
 # --- 7. Run the Ansible Playbook ---
 cd "$SETUP_DIR/ansible"
 echo "🚀 Running the Ansible playbook..."
-ansible-playbook -i inventory.yml playbook.yml --ask-become-pass
+ansible-playbook -i inventory.ini playbook.yml --ask-become-pass
 
 echo ""
 echo "✅ AWS developer workspace setup complete!"
