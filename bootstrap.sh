@@ -53,9 +53,9 @@ else
 fi
 
 # --- 7. Run the Ansible Playbook ---
-cd "$SETUP_DIR"
+cd "$SETUP_DIR/ansible"
 echo "🚀 Running the Ansible playbook..."
-ansible-playbook -i inventory.yml main.yml --ask-become-pass
+ansible-playbook -i inventory.yml playbook.yml --ask-become-pass
 
 echo ""
 echo "✅ AWS developer workspace setup complete!"
