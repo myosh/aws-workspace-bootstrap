@@ -45,7 +45,10 @@ else
 fi
 
 # --- 4. Start SSH Agent ---
-eval "$(ssh-agent -s)"
+echo "🔑 Starting SSH agent..."
+SSH_AGENT_OUTPUT=$(ssh-agent -s)
+export SSH_AUTH_SOCK=$(echo "$SSH_AGENT_OUTPUT" | sed -n 's/^SSH_AUTH_SOCK=\([^;]*\).*/\1/p')
+export SSH_AGENT_PID=$(echo "$SSH_AGENT_OUTPUT" | sed -n 's/^SSH_AGENT_PID=\([^;]*\).*/\1/p')
 ssh-add "$SSH_KEY"
 
 # --- 5. Test SSH Access to GitHub ---
