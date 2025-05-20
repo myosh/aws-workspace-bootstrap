@@ -73,6 +73,7 @@ fi
 # --- 7. Run the Ansible Playbook ---
 cd "$SETUP_DIR/ansible"
 echo "🚀 Running the Ansible playbook..."
+echo "(note: \"BECOME password\" just means your own AWS workspace password)"
 ansible-playbook -i inventory.ini playbook.yml --ask-become-pass
 
 echo ""
