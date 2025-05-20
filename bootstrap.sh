@@ -9,8 +9,10 @@ sudo apt update
 sudo apt install -y git ansible openssh-client
 
 # --- 2. Configure Git ---
+set +e
 git_name=$(git config --global user.name)
 git_email=$(git config --global user.email)
+set -e
 
 if [ -z "$git_name" ] || [ -z "$git_email" ]; then
     echo "🔧 Configuring Git..."
@@ -71,6 +73,7 @@ fi
 # --- 7. Run the Ansible Playbook ---
 cd "$SETUP_DIR/ansible"
 echo "🚀 Running the Ansible playbook..."
+echo "(note: \"BECOME password\" just means your own AWS workspace password)"
 ansible-playbook -i inventory.ini playbook.yml --ask-become-pass
 
 echo ""
