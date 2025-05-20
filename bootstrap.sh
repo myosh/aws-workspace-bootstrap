@@ -9,8 +9,10 @@ sudo apt update
 sudo apt install -y git ansible openssh-client
 
 # --- 2. Configure Git ---
+set +e
 git_name=$(git config --global user.name)
 git_email=$(git config --global user.email)
+set -e
 
 if [ -z "$git_name" ] || [ -z "$git_email" ]; then
     echo "🔧 Configuring Git..."
